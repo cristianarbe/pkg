@@ -19,7 +19,7 @@ show_help() {
 }
 
 check_pkgcache() {
-	if [ -z "$(find @TERMUX_PREFIX@/var/cache/apt/pkgcache.bin -mmin -5)" ]; then
+	if [ -z "$(find /var/cache/apt/pkgcache.bin -mmin -5)" ]; then
 		apt update
 	fi
 }
