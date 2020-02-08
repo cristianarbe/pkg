@@ -20,7 +20,7 @@ show_help() {
 
 check_pkgcache() {
 	if [ -z "$(find /var/cache/apt/pkgcache.bin -mmin -5)" ]; then
-		apt update
+		sudo apt update
 	fi
 }
 
@@ -32,15 +32,27 @@ CMD="$1"
 shift 1
 
 case "$CMD" in
-	f*) dpkg -L "$@";;
-	h*) show_help;;
-	add|i*) check_pkgcache; apt install "$@";;
-	list-a*) apt list "$@";;
-	list-i*) apt list --installed "$@";;
-	rei*) apt install --reinstall "$@";;
-	se*) check_pkgcache; apt search "$@";;
-	sh*) apt show "$@";;
-	un*|rem*|rm|del*) apt remove "$@";;
-	up*) apt update; apt full-upgrade "$@";;
-	*) echo "Unknown command: '$CMD' (run 'pkg help' for usage information)"; exit 1;;
+f*) dpkg -L "$@" ;;
+h*) show_help ;;
+add | i*)
+	check_pkgcache
+	sudo apt install "$@"
+	;;
+list-a*) apt list "$@" ;;
+list-i*) apt list --installed "$@" ;;
+rei*) apt install --reinstall "$@" ;;
+se*)
+	check_pkgcache
+	apt search "$@"
+	;;
+sh*) apt show "$@" ;;
+un* | rem* | rm | del*) sudo apt remove "$@" ;;
+up*)
+	sudo apt update
+	sudo apt upgrade
+	;;
+*)
+	echo "Unknown command: '$CMD' (run 'pkg help' for usage information)"
+	exit 1
+	;;
 esac
