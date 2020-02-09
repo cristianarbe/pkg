@@ -1,7 +1,8 @@
 all: pkg
 
 pkg: pkg.sh
-	s2s -o pkg pkg.sh
+	cat pkg.sh > pkg
+	chmod a+x pkg
 
 install:
 	cp pkg /usr/local/bin/
