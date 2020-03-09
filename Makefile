@@ -5,7 +5,7 @@ pkg: pkg.sh
 	chmod a+x pkg
 
 install:
-	cp pkg /usr/local/bin/
+	mv pkg /usr/local/bin/
 
 clean:
 	rm -f pkg
