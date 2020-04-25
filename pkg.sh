@@ -49,7 +49,7 @@ main() {
 		apt search "$@"
 		;;
 	sh*) apt show "$@" ;;
-	un* | rem* | rm | del*) sudo apt remove "$@" ;;
+	un* | rem* | rm | del*) sudo apt --autoremove purge "$@" ;;
 	up*)
 		pkg_update
 		sudo apt upgrade
